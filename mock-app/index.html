@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Reconciliation Dashboard - QA Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.development.js"></script>
+    <script src="https://unpkg.com/@mui/x-data-grid@latest/umd/x-data-grid.development.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div class="app-container">
+            <header class="app-header">
+                <h1>Bank Reconciliation Dashboard</h1>
+                <div class="header-actions">
+                    <button id="refresh-btn" class="btn btn-secondary">Refresh</button>
+                    <input type="file" id="upload-btn" data-testid="upload-button" accept=".csv,.xlsx" style="display: none;">
+                    <button onclick="document.getElementById('upload-btn').click()" class="btn btn-primary">Upload File</button>
+                </div>
+            </header>
+
+            <div class="toolbar-container">
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="search-input"
+                        data-testid="search-transactions"
+                        placeholder="Search transactions..."
+                        class="search-input"
+                    >
+                </div>
+                <div class="filter-container">
+                    <button id="filter-btn" data-testid="filter-button" class="btn btn-outline">Filter</button>
+                    <button id="sort-btn" data-testid="sort-button" class="btn btn-outline">Sort</button>
+                    <button id="export-btn" data-testid="export-button" class="btn btn-outline">Export</button>
+                </div>
+            </div>
+
+            <!-- Filter Menu (Hidden by default) -->
+            <div id="filter-menu" data-testid="filter-menu" class="filter-menu" style="display: none;">
+                <h3>Filter by Status</h3>
+                <div class="filter-options">
+                    <label>
+                        <input type="checkbox" data-testid="status-pending"> Pending
+                    </label>
+                    <label>
+                        <input type="checkbox" data-testid="status-reconciled"> Reconciled
+                    </label>
+                    <label>
+                        <input type="checkbox" data-testid="status-disputed"> Disputed
+                    </label>
+                </div>
+                <div class="filter-actions">
+                    <button id="apply-filter" data-testid="apply-filter" class="btn btn-primary">Apply</button>
+                    <button id="clear-filter" class="btn btn-secondary">Clear</button>
+                </div>
+            </div>
+
+            <!-- Data Grid Container -->
+            <div class="data-grid-container">
+                <div id="transactions-grid" data-testid="transactions-grid" class="data-grid" role="grid">
+                    <div class="grid-header">
+                        <div class="grid-cell header-cell" data-field="id">
+                            <span>Transaction ID</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="date">
+                            <span>Date</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="description">
+                            <span>Description</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="amount">
+                            <span>Amount</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="currency">
+                            <span>Currency</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="status">
+                            <span>Status</span>
+                            <span class="sort-indicator" data-sort="none">⇅</span>
+                        </div>
+                        <div class="grid-cell header-cell" data-field="actions">
+                            <span>Actions</span>
+                        </div>
+                    </div>
+                    <div class="grid-body" id="grid-body">
+                        <div class="virtual-scroller">
+                            <!-- Transaction rows will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading indicator -->
+            <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <span>Loading transactions...</span>
+            </div>
+
+            <!-- Error message -->
+            <div id="error-message" data-testid="error-message" class="error-message" style="display: none;">
+                <span>Failed to load transactions. Please try again.</span>
+            </div>
+
+            <!-- No data overlay -->
+            <div id="no-data-overlay" class="no-data-overlay" style="display: none;">
+                <span>No transactions found</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

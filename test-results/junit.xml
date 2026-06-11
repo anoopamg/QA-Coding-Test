@@ -1,0 +1,18 @@
+<testsuites id="" name="" tests="2" failures="0" skipped="1" errors="0" time="6.843944">
+<testsuite name="specs\bank-reconciliation.spec.ts" timestamp="2026-06-11T12:44:29.316Z" hostname="chromium" tests="2" failures="0" skipped="1" time="4.994" errors="0">
+<testcase name="Bank Reconciliation - Basic Testing › should display bank transactions correctly" classname="specs\bank-reconciliation.spec.ts" time="4.994">
+<system-out>
+<![CDATA[Total transactions loaded: 1000
+]]>
+</system-out>
+</testcase>
+<testcase name="Bank Reconciliation - Basic Testing › live debugging session" classname="specs\bank-reconciliation.spec.ts">
+<properties>
+<property name="skip" value="">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>
